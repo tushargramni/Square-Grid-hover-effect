@@ -1,0 +1,233 @@
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+  }
+  body {
+    overflow: auto;
+  }
+  .con {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-content: center;
+    /* border: solid 2px blue; */
+  }
+  .con .loader {
+    position: fixed;
+    z-index: 3;
+    top: 0%;
+    padding: 2px;
+    cursor: pointer;
+    background-color: transparent;
+    animation-name: load;
+    animation-delay: 0s;
+    background: linear-gradient(90deg, red, orange, yellow);
+    animation-duration: 8s;
+    animation-play-state: running;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes load {
+    0%,
+    50% {
+      width: 0%;
+      background-color: transparent;
+      animation-play-state: paused;
+      background: linear-gradient(90deg, red, orange, yellow);
+    }
+    40%,
+    100% {
+      width: 100%;
+      animation-play-state: running;
+      background-color: transparent;
+      background: linear-gradient(90deg, red, orange, yellow);
+    }
+  }
+  .con .particle-box {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    overflow: hidden;
+    /* gap: 2em; */
+    grid-template-columns: repeat(25, 1fr);
+    transition: all 0.1s linear;
+  }
+  .con .particle-box .particle {
+    padding: 1em;
+    /* margin: 1rem; */
+    display: block;
+    box-shadow: -0px -0px 1px green;
+    transition: all 0.1s linear;
+  }
+
+  .con .particle-box .particle:nth-child(n):hover {
+    cursor: pointer;
+    transform: scale(1.5) rotate(360deg);
+    gap: 0;
+    backdrop-filter: blur(30px);
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 255, 0, 0.45),
+      rgba(0, 255, 0, 0.85),
+      green
+    );
+    background-color: transparent;
+  }
+  .con .particle-box .particle:nth-child(even):hover {
+    cursor: pointer;
+    gap: 0;
+    border-radius: 0 50%;
+    transition: all 0.1s linear;
+  }
+  .con .particle-box .particle:nth-child(odd):hover {
+    cursor: pointer;
+    gap: 0;
+    background: transparent;
+    z-index: 0;
+    position: relative;
+    background: linear-gradient(
+      45deg,
+      white,
+      rgba(0, 255, 0, 0.45),
+      rgba(0, 255, 0, 0.85)
+    );
+    /* background: linear-gradient(45deg,rgba(0,255,0,0.85),white) ; */
+  }
+  .con
+    .particle-box
+    .particle:nth-child(odd):hover
+    ~ .particle:nth-child(odd) {
+    transform: scale(1.5) rotate(360deg);
+    background: linear-gradient(
+      45deg,
+      white,
+      rgba(0, 255, 0, 0.45),
+      rgba(0, 255, 0, 0.85)
+    );
+    position: relative;
+    z-index: -1;
+    /* transition: all .1s ease-in-out ; */
+  }
+  .con
+    .particle-box
+    .particle:nth-child(odd):hover
+    ~ .particle:nth-child(even) {
+    transform: scale(1) rotate(360deg);
+    backdrop-filter: blur(20px);
+    gap: 0;
+    z-index: 0;
+    position: relative;
+    border-radius: 50%;
+    background: repeating-linear-gradient(45deg, white, red);
+    box-shadow: 0px 0px 4px green;
+    /* transition: all .1s ease-in-out ; */
+  }
+
+  .con
+    .particle-box
+    .particle:nth-child(even):hover
+    ~ .particle:nth-child(even) {
+    transform: scale(1.5) rotate(360deg);
+    gap: 0;
+    border-radius: 0 50%;
+    backdrop-filter: blur(10px);
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 255, 0, 0.45),
+      rgba(0, 255, 0, 0.85),
+      green
+    );
+    background-color: transparent;
+    /* transition: all 0.5s ease-in-out ; */
+  }
+  .con
+    .particle-box
+    .particle:nth-child(even):hover
+    ~ .particle:nth-child(odd) {
+    transform: scale(1) rotate(360deg);
+    border-radius: 50%;
+    background: red;
+    backdrop-filter: blur(10px);
+    /* transition: all 0.5s ease-in-out ; */
+  }
+
+  .con .head {
+    width: max-content;
+    display: flex;
+    height: fit-content;
+    flex-wrap: wrap;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    transition: all 1s linear;
+    backdrop-filter: blur(20px);
+    background: hsla(255, 100%, 100%, 0.95);
+    border-radius: 1em;
+    box-shadow: 5px 5px 15px green;
+    animation-play-state: running;
+    animation: ani-1 0.1s linear 1;
+  }
+  @keyframes ani-1 {
+    from {
+      left: -100%;
+    }
+    to {
+      left: 0;
+    }
+  }
+
+  .con .head:hover {
+    background-color: green;
+    animation-play-state: paused;
+    box-shadow: -4px -4px 10px white, 4px 4px 30px darkgreen;
+  }
+  .con .head:hover .content {
+    color: white;
+    text-shadow: 4px 4px 8px whitesmoke;
+  }
+  .con .head .content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    margin: 0.25em;
+    height: min-content;
+    flex-wrap: wrap;
+    font-size: 3em;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    color: green;
+    text-shadow: 4px 4px 4px lightgreen;
+    animation: ani-2 8s forwards 1;
+  }
+  .con .head .content::selection {
+    background-color: white;
+    color: green;
+    cursor: pointer;
+  }
+
+  @keyframes ani-2 {
+    0%,
+    50% {
+      border-right: solid 2px green;
+      width: 0%;
+    }
+
+    100% {
+      width: 100%;
+      border-right: solid 2px green;
+    }
+  }
+  @media (max-width: 930px) {
+    .con .head .content {
+      font-size: 2.5em;
+    }
+  }
+  @media (max-width: 780px) {
+    .con .head .content {
+      font-size: 2em;
+    }
+  }
